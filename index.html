@@ -1,0 +1,129 @@
+
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FlyStar - A tua rede social</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f0f2f5;
+      color: vermelho 
+    }
+    header {
+      background: #1769ff;
+      color: white;
+      padding: 18px;
+      text-align: center;
+    }
+    header h1 { margin: 0; }
+    header p { margin-bottom: 0; }
+    main {
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 0 12px;
+    }
+    .card {
+      background: white;
+      padding: 18px;
+      margin-bottom: 16px;
+      border-radius: 14px;
+      box-shadow: 0 2px 8px #0000000d;
+    }
+    textarea {
+      width: 100%;
+      min-height: 90px;
+      padding: 12px;
+      border: 1px solid #ccd3df;
+      border-radius: 10px;
+      font: inherit;
+      resize: vertical;
+    }
+    button {
+      background: #1769ff;
+      color: white;
+      border: 0;
+      padding: 11px 16px;
+      border-radius: 9px;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+    .post {
+      border-top: 1px solid #eee;
+      padding-top: 12px;
+      margin-top: 12px;
+      overflow-wrap: anywhere;
+    }
+    .muted { color: #657087; font-size: 14px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>⭐ FlyStar</h1>
+    <p>Conecta-te. Partilha. Brilha.</p>
+  </header>
+
+  <main>
+    <section class="card">
+      <h2>Bem-vindo à FlyStar!</h2>
+      <p>Voa como 🌟.</p>
+    </section>
+
+    <section class="card">
+      <h3>O que estás a pensar?</h3>
+      <textarea id="mensagem"
+        placeholder="Escreve a tua publicação..."></textarea>
+      <button onclick="publicar()">Publicar</button>
+      <p class="muted">Esta é uma versão inicial de demonstração.</p>
+    </section>
+
+    <section class="card">
+      <h3>Publicações</h3>
+      <div id="publicacoes">
+        <p class="muted">Ainda não há publicações. Sê o primeiro!</p>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    function publicar() {
+      const campo = document.getElementById("mensagem");
+      const texto = campo.value.trim();
+
+      if (!texto) {
+        alert("Escreve alguma coisa primeiro!");
+        return;
+      }
+
+      const lista = document.getElementById("publicacoes");
+      if (lista.querySelector(".muted")) {
+        lista.innerHTML = "";
+      }
+
+      const post = document.createElement("div");
+      post.className = "post";
+
+      const conteudo = document.createElement("p");
+      conteudo.textContent = texto;
+
+      const gostar = document.createElement("button");
+      gostar.textContent = "❤️ Gostar (0)";
+      let total = 0;
+
+      gostar.onclick = function() {
+        total++;
+        gostar.textContent = "❤️ Gostar (" + total + ")";
+      };
+
+      post.appendChild(conteudo);
+      post.appendChild(gostar);
+      lista.prepend(post);
+      campo.value = "";
+    }
+  </script>
+</body>
+  </html>
+    
